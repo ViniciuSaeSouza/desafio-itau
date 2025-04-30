@@ -1,28 +1,36 @@
 package com.desafio.itau.api.controller;
 
-import com.desafio.itau.api.model.Transaction;
+import com.desafio.itau.api.model.TransactionDTO;
+import com.desafio.itau.api.repository.TransactionRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/transacao")
 public class TransactionController {
-    List<Transaction> transactionList = new ArrayList<>();
+
+    @Autowired
+    TransactionRepository transactionRepository;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Transaction> index () {
-        return transactionList;
+    public List<TransactionDTO> index() {
+        return transactionRepository.getAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private void create(@RequestBody @Valid Transaction transaction) {
-        transactionList.add(transaction);
+    public void create(@RequestBody @Valid TransactionDTO transactionDTO) {
+        transactionRepository.create(transactionDTO);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAll() {
+        transactionRepository.deleteAll();
     }
 }
