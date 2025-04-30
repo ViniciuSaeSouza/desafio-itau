@@ -1,2 +1,2 @@
-# desafio-itau
-Desafio de programação do Itaú - Júnior para criação de uma API REST backend em Java
+# Desafio de Programação Itaú Unibanco
+# [Link do desafio](https://github.com/rafaellins-itau/desafio-itau-vaga-99-junior)
