@@ -4,10 +4,7 @@ import com.desafio.itau.api.model.Transaction;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +14,15 @@ import java.util.List;
 public class TransactionController {
     List<Transaction> transactionList = new ArrayList<>();
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Transaction> index () {
+        return transactionList;
+    }
+
     @PostMapping
-    private ResponseEntity<Void> create(@RequestBody @Valid Transaction transaction) {
+    @ResponseStatus(HttpStatus.CREATED)
+    private void create(@RequestBody @Valid Transaction transaction) {
         transactionList.add(transaction);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
